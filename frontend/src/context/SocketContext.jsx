@@ -7,7 +7,7 @@ const SocketContext = createContext();
 export const useSocketContext = () => {
 	return useContext(SocketContext);
 };
-
+const apiUrl= import.meta.env.VITE_API_URL;
 export const SocketContextProvider = ({ children }) => {
 	const [socket, setSocket] = useState(null);
 	const [onlineUsers, setOnlineUsers] = useState([]);
@@ -15,7 +15,7 @@ export const SocketContextProvider = ({ children }) => {
 
 	useEffect(() => {
 		if (authUser) {
-			const socket = io("https://chat-app-yt.onrender.com", {
+			const socket = io(apiUrl, {
 				query: {
 					userId: authUser._id,
 				},
