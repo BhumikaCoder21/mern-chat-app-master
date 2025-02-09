@@ -1,14 +1,7 @@
 {
   "builds": [
-    {
-      "src": "backend/server.js",
-      "use": "@vercel/node"
-    }
+    { "src": "package.json", "use": "@vercel/node" }
   ],
-  "routes": [
-    {
-      "src": "/api/(.*)",
-      "dest": "backend/server.js"
-    }
-  ]
+  "installCommand": "npm install && cd backend && npm install",
+  "buildCommand": "npm run build"
 }
