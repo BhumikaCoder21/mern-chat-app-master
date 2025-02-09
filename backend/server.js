@@ -32,4 +32,10 @@ app.get("*", (req, res) => {
 server.listen(PORT, () => {
 	connectToMongoDB();
 	console.log(`Server Running on port ${PORT}`);
+}).on("error", (err) => {
+	if (err.code === "EADDRINUSE") {
+		console.error(`Port ${PORT} is already in use. Trying a different port...`);
+		const newPort = Math.floor(Math.random() * 1000) + 4000; // Random port between 4000-5000
+		server.listen(newPort, () => console.log(`Server running on port ${newPort}`));
+	}
 });
