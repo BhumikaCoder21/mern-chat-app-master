@@ -12,6 +12,7 @@ import connectToMongoDB from "./db/connectToMongoDB.js";
 import { app, server } from "./socket/socket.js";
 
 dotenv.config();
+connectToMongoDB();
 
 const __dirname = path.resolve();
 // PORT should be assigned after calling dotenv.config() because we need to access the env variables. Didn't realize while recording the video. Sorry for the confusion.
@@ -32,7 +33,6 @@ app.use("/api/messages", messageRoutes);
 app.use("/api/users", userRoutes);
 
 server.listen(PORT, () => {
-	connectToMongoDB();
 	console.log(`Server Running on port ${PORT}`);
 }).on("error", (err) => {
 	if (err.code === "EADDRINUSE") {
